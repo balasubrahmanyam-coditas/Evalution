@@ -1,7 +1,7 @@
 package org.example;
 
 import javax.persistence.*;
-import java.awt.print.Book;
+import org.example.Book;
 import java.util.List;
 import java.util.Set;
 

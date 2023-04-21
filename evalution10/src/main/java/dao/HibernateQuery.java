@@ -1,6 +1,7 @@
 package dao;
 
 import org.example.Author;
+import org.example.Book;
 import org.example.Publication;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -36,19 +37,28 @@ public class HibernateQuery {
 
     }
     public static void Query2() {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
 
-        String hql1 = "SELECT b FROM Book b JOIN b.publisher p WHERE p.publisherName = 'Nirali' AND b.bookPrice >= 600";
-        Query query = session.createQuery(hql1);
-        List<Publication> results = query.getResultList();
 
-        session.save(hql1);
+        Query<Book>query = session.createQuery("SELECT b FROM Book b JOIN b.publisher p WHERE p.publisherName = 'Nirali' AND b.bookPrice >= 600");
+//        Query query = session.createQuery(hql1);
+//        List<Publication> results = query.getResultList();
+
+        query.setParameter("name", "Nirali");
+        query.setParameter("price", 500);
+
+        List<Book> books = query.getResultList();
+
+        for (Book book : books) {
+            System.out.println("Book Name:"+book.getbName()+"  "+"Publication:"+book.getPublication().getpName()+"  "+"Price: "+book.getbPrice());
+        }
+//        session.save(hql1);
 
         transaction.commit();
-
         session.close();
+
 
     }
     public static void Query3() {
@@ -56,9 +66,20 @@ public class HibernateQuery {
         Transaction transaction = session.beginTransaction();
 
 
-        String hql = "SELECT b FROM Book b JOIN b.author a WHERE a.authorName LIKE 'A%i'";
-        NativeQuery<Author> query;
-        query = session.createNativeQuery(hql, Author.class);
+//        String hql = "SELECT b FROM Book b JOIN b.author a WHERE a.authorName LIKE 'A%i'";
+//        NativeQuery<Author> query;
+//        query = session.createNativeQuery(hql, Author.class);
+
+        Query<Book> query = session.createQuery("SELECT b FROM Book b JOIN b.author a WHERE a.name LIKE 'a%i'", Book.class);
+        List<Book> books = query.getResultList();
+
+        for (Book book : books) {
+            System.out.println(book.getbName()+"  "+ book.getAuthor().getaName());
+        }
+
+        transaction.commit();
+        session.close();
+
 
 
         session.close();

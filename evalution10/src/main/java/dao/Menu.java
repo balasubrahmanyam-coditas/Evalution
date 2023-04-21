@@ -3,6 +3,7 @@ package dao;
 import org.example.Author;
 import org.example.Book;
 import org.example.Publication;
+import org.hibernate.Hibernate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class Menu {
                     break;
                 case 1:
                     boolean flag1 = true;
-                    while (true) {
+                    while (flag1) {
                         System.out.println("Create");
                         System.out.println("0.Exit");
                         System.out.println("1.Book");
@@ -46,6 +47,8 @@ public class Menu {
                                 book.setbName(sc.readLine());
                                 System.out.println("Enter bid");
                                 book.setbId(Integer.parseInt(sc.readLine()));
+                                System.out.println("Enter price of book:");
+                                book.setbPrice(Integer.parseInt(sc.readLine()));
 
 
                                 CrudOperations.createBook(book);
@@ -55,8 +58,6 @@ public class Menu {
                                 Author author = new Author();
                                 System.out.println("Enter Name of Author:");
                                 author.setaName(sc.readLine());
-                                System.out.println("Enter Author id:");
-                                author.setaId(sc.read());
                                 OperationAuthor.createAuthor(author);
                                 break;
                             case 3:
@@ -69,20 +70,22 @@ public class Menu {
                                 break;
                             default:
                                 System.out.println("Invaild Choice!!!");
+                                break;
 
                         }
                     }
+                    break;
 
                 case 2:
                     boolean flag2 = true;
-                    while (true) {
+                    while (flag2) {
                         System.out.println("Retrive");
                         System.out.println("0.Exit");
                         System.out.println("1.Book");
                         System.out.println("2.Author");
                         System.out.println("3.Publication");
-                        int choice1 = Integer.parseInt(sc.readLine());
-                        switch (choice1) {
+                        int choice2 = Integer.parseInt(sc.readLine());
+                        switch (choice2) {
                             case 0:
                                 flag2 = false;
                                 break;
@@ -103,14 +106,14 @@ public class Menu {
                     }
                 case 3:
                     boolean flag3 = true;
-                    while (true) {
+                    while (flag3) {
                         System.out.println("Update");
                         System.out.println("0.Exit");
                         System.out.println("1.Book");
                         System.out.println("2.Author");
                         System.out.println("3.Publication");
-                        int choice1 = Integer.parseInt(sc.readLine());
-                        switch (choice1) {
+                        int choice3 = Integer.parseInt(sc.readLine());
+                        switch (choice3) {
                             case 0:
                                 flag1 = false;
                                 break;
@@ -131,15 +134,15 @@ public class Menu {
                     }
                 case 4:
                     boolean flag4 = true;
-                    while (true) {
+                    while (flag4) {
                         System.out.println("Delete");
                         System.out.println("0.Exit");
                         System.out.println("1.Book");
                         System.out.println("2.Author");
                         System.out.println("3.Publication");
                         System.out.println("4.HibernateQuery");
-                        int choice1 = Integer.parseInt(sc.readLine());
-                        switch (choice1) {
+                        int choice4 = Integer.parseInt(sc.readLine());
+                        switch (choice4) {
                             case 0:
                                 flag4 = false;
                                 break;
@@ -160,14 +163,14 @@ public class Menu {
                     }
                 case 5:
                     boolean flag5 = true;
-                    while (true) {
+                    while (flag5) {
                         System.out.println("0.Exit");
                         System.out.println("1.Publication date");
                         System.out.println("2.price greaterThan 500");
                         System.out.println("3.Letter Starts with A & i");
 
-                        int choice1 = Integer.parseInt(sc.readLine());
-                        switch (choice1) {
+                        int choice5 = Integer.parseInt(sc.readLine());
+                        switch (choice5) {
                             case 0:
                                 flag4 = false;
                                 break;
