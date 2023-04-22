@@ -23,8 +23,8 @@ public class HibernateQuery {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql="select a.authorName from Author a where ";
-        hql = "SELECT a FROM Author a JOIN a.bookList b JOIN b.publisher p WHERE  p.publishedDate >= '2021-01-01'";
+        //String hql="select a.authorName from Author a where ";
+        String hql = "SELECT a FROM Author a JOIN a.bookSet b JOIN b.publication p WHERE  p.pDate <= '2021-01-01'";
         Query query = session.createQuery(hql);
         //LocalDate date1;
 
@@ -42,7 +42,7 @@ public class HibernateQuery {
 
 
 
-        Query<Book>query = session.createQuery("SELECT b FROM Book b JOIN b.publisher p WHERE p.publisherName = 'Nirali' AND b.bookPrice >= 600");
+        Query<Book>query = session.createQuery("SELECT b FROM Book b JOIN b.publication p WHERE p.pName = 'Nirali' AND b.bPrice >= 600");
 //        Query query = session.createQuery(hql1);
 //        List<Publication> results = query.getResultList();
 
